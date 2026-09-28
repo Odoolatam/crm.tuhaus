@@ -42,6 +42,14 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
+  // Public landing ("/"): signed-in users go straight to the app.
+  if (user && request.nextUrl.pathname === '/') {
+    const url = request.nextUrl.clone()
+    url.pathname = '/dashboard'
+    url.search = ''
+    return withRefreshedCookies(NextResponse.redirect(url))
+  }
+
   // Auth pages - redirect to dashboard if already logged in.
   // Exception: when an invite token is in the query string we
   // send the already-signed-in user to /join/<token> instead so
