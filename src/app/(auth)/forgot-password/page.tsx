@@ -28,7 +28,10 @@ export default function ForgotPasswordPage() {
     setError(null);
     setLoading(true);
 
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+    // Always return to the domain the visitor started on. The PKCE code
+    // verifier cookie is per-domain, so sending crm.smarterbot.store
+    // visitors back to crm.tuhaus.com (or vice versa) breaks the login.
+    const baseUrl = window.location.origin;
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${baseUrl}/auth/callback?next=/reset-password`,

@@ -9,6 +9,12 @@ import { NextResponse, type NextRequest } from 'next/server'
  * visitor is sent back to /login with `error=oauth_failed` plus a short
  * machine-readable `reason`, so the login page can show a useful message
  * instead of silently reloading.
+ *
+ * All redirects use RELATIVE locations ("/dashboard", "/login?..."), so
+ * the browser stays on the public domain it came from (crm.tuhaus.com or
+ * crm.smarterbot.store). Session and PKCE cookies are per-domain, so an
+ * absolute redirect to a different domain would break the login. It also
+ * avoids the container's internal URL leaking into redirects.
  */
 
 // Map raw Supabase error text to a short reason code for the login page.
@@ -23,20 +29,25 @@ function toReason(message: string | null | undefined): string {
   return 'unknown'
 }
 
+// Only allow same-site paths as the post-login destination.
+function safeNext(raw: string | null): string {
+  if (!raw || !raw.startsWith('/') || raw.startsWith('//') || raw.startsWith('/\\')) {
+    return '/dashboard'
+  }
+  return raw
+}
+
+function redirectTo(location: string): NextResponse {
+  return new NextResponse(null, { status: 307, headers: { Location: location } })
+}
+
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
-  const next = requestUrl.searchParams.get('next') || '/dashboard'
+  const next = safeNext(requestUrl.searchParams.get('next'))
 
-  // Use NEXT_PUBLIC_SITE_URL for production redirect (not container internal URL)
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || requestUrl.origin
-
-  const loginWithError = (reason: string) => {
-    const errorUrl = new URL('/login', siteUrl)
-    errorUrl.searchParams.set('error', 'oauth_failed')
-    errorUrl.searchParams.set('reason', reason)
-    return NextResponse.redirect(errorUrl)
-  }
+  const loginWithError = (reason: string) =>
+    redirectTo(`/login?error=oauth_failed&reason=${encodeURIComponent(reason)}`)
 
   // Supabase can redirect here with an error instead of a code, e.g.
   // when new sign-ups are disabled or the user cancelled on Google.
@@ -49,7 +60,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (code) {
-    const response = NextResponse.redirect(`${siteUrl}${next}`)
+    const response = redirectTo(next)
 
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -78,5 +89,5 @@ export async function GET(request: NextRequest) {
     return response
   }
 
-  return NextResponse.redirect(`${siteUrl}${next}`)
+  return redirectTo(next)
 }
