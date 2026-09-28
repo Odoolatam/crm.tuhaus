@@ -2153,5 +2153,18 @@
     "feature2": "Contactos y embudo de ventas ordenados",
     "feature3": "Automatizaciones y respuestas con IA",
     "backHome": "Volver al inicio"
+  },
+  "Billing": {
+    "bannerTrial": "Te quedan {days, plural, one {# día} other {# días}} de prueba gratis.",
+    "bannerCta": "Activar plan",
+    "expiredTitle": "Tu prueba gratis terminó",
+    "expiredText": "Tus conversaciones, contactos y configuración siguen guardados. Activa tu plan para volver a usar Tuhaus CRM.",
+    "suspendedTitle": "Tu cuenta está pausada",
+    "suspendedText": "Tus datos siguen guardados. Escríbenos para reactivar tu cuenta.",
+    "planLine": "Plan Tuhaus CRM: {price} {period}",
+    "activateCta": "Activar por WhatsApp",
+    "signOut": "Cerrar sesión",
+    "whatsappActivate": "Hola, quiero activar mi plan de Tuhaus CRM. Mi cuenta es {email}.",
+    "loading": "Cargando..."
   }
 }

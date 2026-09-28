@@ -1875,5 +1875,18 @@
     "feature2": "Organized contacts and sales pipeline",
     "feature3": "Automations and AI-assisted replies",
     "backHome": "Back to home"
+  },
+  "Billing": {
+    "bannerTrial": "{days, plural, one {# day} other {# days}} left in your free trial.",
+    "bannerCta": "Activate plan",
+    "expiredTitle": "Your free trial has ended",
+    "expiredText": "Your conversations, contacts and settings are still saved. Activate your plan to keep using Tuhaus CRM.",
+    "suspendedTitle": "Your account is paused",
+    "suspendedText": "Your data is still saved. Contact us to reactivate your account.",
+    "planLine": "Tuhaus CRM plan: {price} {period}",
+    "activateCta": "Activate via WhatsApp",
+    "signOut": "Sign out",
+    "whatsappActivate": "Hi, I'd like to activate my Tuhaus CRM plan. My account is {email}.",
+    "loading": "Loading..."
   }
 }
