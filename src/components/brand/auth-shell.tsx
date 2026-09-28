@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { Bot, KanbanSquare, MessagesSquare } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -41,7 +42,13 @@ export function AuthShell({ children }: { children: ReactNode }) {
           className="pointer-events-none absolute -bottom-24 -right-24 h-[26rem] w-[26rem] opacity-[0.06]"
         />
 
-        <BrandLogo tone="dark" height={40} className="relative" />
+        <Link
+          href="/"
+          aria-label={`${BRAND.name}: ${t("backHome")}`}
+          className="relative w-fit rounded-md transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4"
+        >
+          <BrandLogo tone="dark" height={40} />
+        </Link>
 
         <div className="relative max-w-md">
           <h2 className="text-3xl font-semibold leading-tight tracking-tight">
@@ -72,10 +79,20 @@ export function AuthShell({ children }: { children: ReactNode }) {
 
       {/* Form side */}
       <main className="flex flex-col items-center justify-center px-4 py-10 sm:px-8">
-        <div className="mb-8 lg:hidden">
+        <Link
+          href="/"
+          aria-label={`${BRAND.name}: ${t("backHome")}`}
+          className="mb-8 rounded-md transition-opacity hover:opacity-80 lg:hidden"
+        >
           <BrandLogo height={36} />
-        </div>
+        </Link>
         <div className="flex w-full justify-center">{children}</div>
+        <Link
+          href="/"
+          className="mt-6 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          ← {t("backHome")}
+        </Link>
       </main>
     </div>
   );
