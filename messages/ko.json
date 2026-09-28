@@ -12,7 +12,14 @@
     "signingIn": "로그인 중...",
     "signIn": "로그인",
     "noAccount": "계정이 없으신가요?",
-    "createAccount": "계정 만들기"
+    "createAccount": "계정 만들기",
+    "oauthErrors": {
+      "unknown": "We couldn't sign you in with Google. Try again or use your email and password.",
+      "signup_disabled": "This Google account isn't registered in Tuhaus CRM yet.",
+      "new_user_failed": "We couldn't create your account with Google. Try signing up with your email or contact us on WhatsApp.",
+      "expired": "The sign-in expired or was opened in another browser. Try again from this same window.",
+      "cancelled": "You cancelled the Google sign-in."
+    }
   },
   "Sidebar": {
     "title": "WhatsApp용 CRM 템플릿",

@@ -50,7 +50,10 @@ function SignupPageInner() {
     setGoogleLoading(true);
     setError(null);
 
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+    // Always return to the domain the visitor started on. The PKCE code
+    // verifier cookie is per-domain, so sending crm.smarterbot.store
+    // visitors back to crm.tuhaus.com (or vice versa) breaks the login.
+    const baseUrl = window.location.origin;
     const redirectTo = inviteToken
       ? `${baseUrl}/auth/callback?next=/join/${encodeURIComponent(inviteToken)}`
       : `${baseUrl}/auth/callback?next=/dashboard`;

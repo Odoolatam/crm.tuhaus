@@ -12,7 +12,14 @@
     "signingIn": "Iniciando sesión...",
     "signIn": "Iniciar sesión",
     "noAccount": "¿No tienes una cuenta?",
-    "createAccount": "Crear cuenta"
+    "createAccount": "Crear cuenta",
+    "oauthErrors": {
+      "unknown": "No pudimos iniciar sesión con Google. Inténtalo de nuevo o entra con tu correo y contraseña.",
+      "signup_disabled": "Esta cuenta de Google todavía no está registrada en Tuhaus CRM.",
+      "new_user_failed": "No pudimos crear tu cuenta con Google. Intenta registrarte con tu correo o escríbenos por WhatsApp.",
+      "expired": "El inicio de sesión expiró o se abrió en otro navegador. Inténtalo de nuevo desde esta misma ventana.",
+      "cancelled": "Cancelaste el inicio de sesión con Google."
+    }
   },
   "Sidebar": {
     "title": "Tuhaus CRM",
