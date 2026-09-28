@@ -12,7 +12,14 @@
     "signingIn": "Signing in...",
     "signIn": "Sign in",
     "noAccount": "Don't have an account?",
-    "createAccount": "Create account"
+    "createAccount": "Create account",
+    "oauthErrors": {
+      "unknown": "We couldn't sign you in with Google. Try again or use your email and password.",
+      "signup_disabled": "This Google account isn't registered in Tuhaus CRM yet.",
+      "new_user_failed": "We couldn't create your account with Google. Try signing up with your email or contact us on WhatsApp.",
+      "expired": "The sign-in expired or was opened in another browser. Try again from this same window.",
+      "cancelled": "You cancelled the Google sign-in."
+    }
   },
   "Sidebar": {
     "title": "CRM Template for WhatsApp",

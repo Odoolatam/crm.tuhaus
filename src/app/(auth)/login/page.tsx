@@ -42,6 +42,25 @@ function LoginPageInner() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  // Set by /auth/callback when Google (or an email link) sign-in fails.
+  const OAUTH_REASONS = [
+    "unknown",
+    "signup_disabled",
+    "new_user_failed",
+    "expired",
+    "cancelled",
+  ] as const;
+  const rawReason = searchParams.get("reason") ?? "unknown";
+  const callbackReason =
+    searchParams.get("error") === "oauth_failed"
+      ? (OAUTH_REASONS as readonly string[]).includes(rawReason)
+        ? rawReason
+        : "unknown"
+      : null;
+  const callbackError = callbackReason
+    ? t(`oauthErrors.${callbackReason}`)
+    : null;
+  const shownError = error ?? callbackError;
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const supabase = createClient();
@@ -118,9 +137,20 @@ function LoginPageInner() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
-            {error && (
-              <div className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
-                {error}
+            {shownError && (
+              <div
+                role="alert"
+                className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400"
+              >
+                {shownError}
+                {!error && callbackReason === "signup_disabled" && (
+                  <>
+                    {" "}
+                    <Link href="/signup" className="font-semibold underline">
+                      {t("createAccount")}
+                    </Link>
+                  </>
+                )}
               </div>
             )}
 
