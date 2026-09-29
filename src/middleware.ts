@@ -1,5 +1,11 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import {
+  BILLING_BLOCKED_PATH,
+  BILLING_GATED_PATHS,
+  billingState,
+  type BillingRow,
+} from '@/lib/billing/state'
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
@@ -80,6 +86,38 @@ export async function middleware(request: NextRequest) {
   // Protected pages - redirect to login if not authenticated
   const protectedPaths = ['/dashboard', '/inbox', '/contacts', '/pipelines', '/broadcasts', '/automations', '/settings']
   if (!user && protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/login'
+    return withRefreshedCookies(NextResponse.redirect(url))
+  }
+
+  // Tuhaus CRM: block the app when the trial or subscription is over.
+  // RLS returns only the signed-in user's own account row. Any error
+  // (missing table, network) is treated as allowed, never as a lockout.
+  const path = request.nextUrl.pathname
+  const isGated = BILLING_GATED_PATHS.some(p => path === p || path.startsWith(p + '/'))
+  if (user && (isGated || path === BILLING_BLOCKED_PATH)) {
+    const { data, error } = await supabase
+      .from('account_billing')
+      .select('status, trial_ends_at, paid_until')
+      .maybeSingle()
+    if (error) console.error('[billing] could not read account_billing:', error.message)
+    const state = billingState(error ? null : (data as BillingRow | null))
+
+    if (isGated && !state.allowed) {
+      const url = request.nextUrl.clone()
+      url.pathname = BILLING_BLOCKED_PATH
+      url.search = ''
+      return withRefreshedCookies(NextResponse.redirect(url))
+    }
+    if (path === BILLING_BLOCKED_PATH && state.allowed) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/dashboard'
+      url.search = ''
+      return withRefreshedCookies(NextResponse.redirect(url))
+    }
+  }
+  if (!user && path === BILLING_BLOCKED_PATH) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return withRefreshedCookies(NextResponse.redirect(url))
