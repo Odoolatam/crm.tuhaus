@@ -20,6 +20,7 @@ import { BrandLogo } from "@/components/brand/brand-logo";
 import { CostEstimator } from "@/components/landing/cost-estimator";
 import { BRAND } from "@/config/brand";
 import { LANDING, whatsappLink } from "@/config/landing";
+import { LEGAL, LEGAL_LINKS } from "@/config/legal";
 
 /**
  * Public landing for crm.tuhaus.com ("/"). Signed-in users never see
@@ -549,6 +550,9 @@ export function LandingPage() {
             <p className="text-sm text-neutral-500">
               © {year} {BRAND.shortName}. {BRAND.description}
             </p>
+            <p className="text-xs text-neutral-400">
+              Un servicio de {LEGAL.companyName}, RUT {LEGAL.rut}
+            </p>
           </div>
           <nav className="flex flex-wrap items-center justify-center gap-6 text-sm text-neutral-600">
             <Link href="/login" className="hover:text-neutral-900">Iniciar sesión</Link>
@@ -561,6 +565,13 @@ export function LandingPage() {
             </a>
           </nav>
         </div>
+        <nav className="mx-auto mt-6 flex max-w-6xl flex-wrap justify-center gap-x-6 gap-y-2 border-t border-neutral-100 pt-6 text-xs text-neutral-500 sm:justify-start">
+          {LEGAL_LINKS.map((l) => (
+            <Link key={l.href} href={l.href} className="hover:text-neutral-900">
+              {l.label}
+            </Link>
+          ))}
+        </nav>
       </footer>
     </div>
   );
