@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
+import { CostEstimator } from "@/components/landing/cost-estimator";
 import { BRAND } from "@/config/brand";
 import { LANDING, whatsappLink } from "@/config/landing";
 
@@ -495,6 +496,8 @@ export function LandingPage() {
           </p>
         </div>
       </section>
+
+      <CostEstimator />
 
       {/* FAQ */}
       <section id="preguntas" className="scroll-mt-20 px-4 py-24 sm:px-6">
