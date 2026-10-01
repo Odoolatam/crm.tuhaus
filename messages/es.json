@@ -1885,6 +1885,33 @@
       "cancel": "Cancelar",
       "save": "Guardar",
       "saving": "Guardando…"
+    },
+    "embeddedSignup": {
+      "title": "Conectar WhatsApp",
+      "desc": "Conecta tu número en pocos pasos con tu cuenta de Facebook. No necesitas crear una app de Meta ni copiar tokens.",
+      "descConnected": "Tu número ya está conectado. Usa estos botones solo si quieres cambiar de número o reconectarlo.",
+      "newNumber": "Conectar un número nuevo",
+      "newNumberHint": "Un número que no usas en la app de WhatsApp",
+      "appNumber": "Usar mi número de WhatsApp Business",
+      "appNumberHint": "Sigues usando la app en tu celular",
+      "connectedOk": "WhatsApp conectado {name}",
+      "connectedNotRegistered": "Número conectado, pero falta activarlo. Ingresa su PIN de verificación en dos pasos.",
+      "connectFailed": "No se pudo conectar WhatsApp. Inténtalo de nuevo.",
+      "popupError": "Meta informó un error en la ventana de conexión.",
+      "sdkFailed": "No se pudo abrir la ventana de Meta. Revisa que tu navegador permita ventanas emergentes.",
+      "pinTitle": "Guarda este PIN",
+      "pinText": "Es el PIN de verificación en dos pasos de tu número. Lo necesitarás si algún día lo mueves a otro proveedor:",
+      "retryTitle": "Activar el número con su PIN",
+      "retryText": "Si tu número ya tenía un PIN de verificación en dos pasos, ingrésalo aquí para terminar la activación.",
+      "retryButton": "Activar",
+      "pinInvalid": "El PIN debe tener 6 dígitos.",
+      "registerOk": "Número activado. Ya puedes recibir mensajes.",
+      "registerFailed": "No se pudo activar el número.",
+      "manualTitle": "Configuración manual (avanzado)",
+      "helpTitle": "Cómo funciona",
+      "help1": "Al presionar Conectar se abre una ventana de Meta. Inicia sesión con tu Facebook, elige o crea tu cuenta de WhatsApp Business y confirma tu número.",
+      "help2": "Si ya usas la app WhatsApp Business en ese número, elige la segunda opción: seguirás usando la app y el CRM al mismo tiempo.",
+      "help3": "Los cargos de Meta por conversaciones se pagan directo a Meta con el medio de pago de tu cuenta de WhatsApp Business."
     }
   },
   "Notifications": {
