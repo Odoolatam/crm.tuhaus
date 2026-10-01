@@ -266,10 +266,10 @@ export function EmbeddedSignupCard({
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid gap-3 sm:grid-cols-2">
-          <Button onClick={() => launch(false)} disabled={busy} className="h-auto py-3">
+        <div className="grid gap-3 xl:grid-cols-2">
+          <Button onClick={() => launch(false)} disabled={busy} className="h-auto w-full min-w-0 shrink justify-start gap-3 whitespace-normal px-4 py-3 text-left">
             {busy ? <Loader2 className="size-4 animate-spin" /> : <MessageCircle className="size-4" />}
-            <span className="flex flex-col items-start text-left">
+            <span className="flex min-w-0 flex-col items-start gap-0.5 text-left">
               <span>{t('newNumber')}</span>
               <span className="text-xs font-normal opacity-80">{t('newNumberHint')}</span>
             </span>
@@ -278,10 +278,10 @@ export function EmbeddedSignupCard({
             variant="outline"
             onClick={() => launch(true)}
             disabled={busy}
-            className="h-auto py-3"
+            className="h-auto w-full min-w-0 shrink justify-start gap-3 whitespace-normal px-4 py-3 text-left"
           >
             {busy ? <Loader2 className="size-4 animate-spin" /> : <Smartphone className="size-4" />}
-            <span className="flex flex-col items-start text-left">
+            <span className="flex min-w-0 flex-col items-start gap-0.5 text-left">
               <span>{t('appNumber')}</span>
               <span className="text-xs font-normal opacity-80">{t('appNumberHint')}</span>
             </span>
