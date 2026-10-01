@@ -1821,6 +1821,33 @@
       "cancel": "Cancel",
       "save": "Save",
       "saving": "Saving…"
+    },
+    "embeddedSignup": {
+      "title": "Connect WhatsApp",
+      "desc": "Connect your number in a few steps with your Facebook account. No Meta app or tokens needed.",
+      "descConnected": "Your number is already connected. Use these buttons only to switch or reconnect your number.",
+      "newNumber": "Connect a new number",
+      "newNumberHint": "A number you don't use in the WhatsApp app",
+      "appNumber": "Use my WhatsApp Business number",
+      "appNumberHint": "Keep using the app on your phone",
+      "connectedOk": "WhatsApp connected {name}",
+      "connectedNotRegistered": "Number connected but not activated yet. Enter its two-step verification PIN.",
+      "connectFailed": "Could not connect WhatsApp. Please try again.",
+      "popupError": "Meta reported an error in the connection window.",
+      "sdkFailed": "Could not open Meta's window. Make sure your browser allows popups.",
+      "pinTitle": "Save this PIN",
+      "pinText": "This is your number's two-step verification PIN. You'll need it if you ever move the number to another provider:",
+      "retryTitle": "Activate the number with its PIN",
+      "retryText": "If your number already had a two-step verification PIN, enter it here to finish activation.",
+      "retryButton": "Activate",
+      "pinInvalid": "The PIN must have 6 digits.",
+      "registerOk": "Number activated. You can now receive messages.",
+      "registerFailed": "Could not activate the number.",
+      "manualTitle": "Manual setup (advanced)",
+      "helpTitle": "How it works",
+      "help1": "Clicking Connect opens a Meta window. Log in with Facebook, pick or create your WhatsApp Business account and confirm your number.",
+      "help2": "If you already use the WhatsApp Business app on that number, pick the second option: you keep using the app and the CRM at the same time.",
+      "help3": "Meta's conversation charges are paid directly to Meta with the payment method on your WhatsApp Business account."
     }
   },
   "Agents": {

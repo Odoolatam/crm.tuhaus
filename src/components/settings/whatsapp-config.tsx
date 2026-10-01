@@ -23,6 +23,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { SettingsPanelHead } from './settings-panel-head';
+import { EmbeddedSignupCard } from './embedded-signup-card';
 import {
   Accordion,
   AccordionItem,
@@ -38,6 +39,11 @@ type ResetReason = 'token_corrupted' | 'meta_api_error' | null;
 
 export function WhatsAppConfig() {
   const t = useTranslations('Settings.whatsapp');
+  const tes = useTranslations('Settings.embeddedSignup');
+  // True when the server has the platform app configured (Embedded
+  // Signup). Then the one-click button is the main path and the manual
+  // credential form becomes an advanced, collapsed option.
+  const [esEnabled, setEsEnabled] = useState(false);
   const supabase = createClient();
   // After multi-user, whatsapp_config is one-row-per-account, not
   // one-row-per-user. We pull `accountId` straight off the auth
@@ -396,6 +402,15 @@ export function WhatsAppConfig() {
       <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
       {/* Main config form */}
       <div className="space-y-6">
+        <EmbeddedSignupCard
+          hasConfig={Boolean(config)}
+          isRegistered={isRegistered}
+          onAvailability={setEsEnabled}
+          onConnected={async () => {
+            if (accountId) await fetchConfig(accountId);
+          }}
+        />
+
         {/* Corrupted-token reset banner */}
         {showResetBanner && (
           <Alert className="bg-amber-950/40 border-amber-600/40">
@@ -554,6 +569,12 @@ export function WhatsAppConfig() {
           </Alert>
         )}
 
+        <details open={!esEnabled} className="group space-y-6 [&:not([open])]:space-y-0">
+        {esEnabled && (
+          <summary className="cursor-pointer select-none text-sm font-medium text-muted-foreground hover:text-foreground">
+            {tes('manualTitle')}
+          </summary>
+        )}
         {/* API Credentials */}
         <Card>
           <CardHeader>
@@ -738,10 +759,23 @@ export function WhatsAppConfig() {
             </Button>
           )}
         </div>
+        </details>
       </div>
 
       {/* Setup Instructions Sidebar */}
       <div>
+        {esEnabled ? (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground text-base">{tes('helpTitle')}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 text-sm text-muted-foreground">
+              <p>{tes('help1')}</p>
+              <p>{tes('help2')}</p>
+              <p>{tes('help3')}</p>
+            </CardContent>
+          </Card>
+        ) : (
         <Card>
           <CardHeader>
             <CardTitle className="text-foreground text-base">{t('setupInstructions')}</CardTitle>
@@ -833,6 +867,7 @@ export function WhatsAppConfig() {
             </div>
           </CardContent>
         </Card>
+        )}
       </div>
     </div>
     </section>
